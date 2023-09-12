@@ -3,7 +3,7 @@
 
 To perform Data preprocessing in a data set downloaded from Kaggle
 
-##REQUIPMENTS REQUIRED:
+## REQUIPMENTS REQUIRED:
 Hardware – PCs
 Anaconda – Python 3.7 Installation / Google Colab /Jupiter Notebook
 
@@ -24,18 +24,73 @@ Another aspect is that the data set should be formatted in such a way that more 
 
 
 ## ALGORITHM:
-Importing the libraries
-Importing the dataset
-Taking care of missing data
-Encoding categorical data
-Normalizing the data
-Splitting the data into test and train
+1.Importing the libraries
+
+2.Importing the dataset
+
+3.Taking care of missing data
+
+4.Encoding categorical data
+
+5.Normalizing the data
+
+6.Splitting the data into test and train
 
 ## PROGRAM:
-/Write your code here/
+```
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+df = pd.read_csv('Churn_Modelling.csv')
+df.head()
+le=LabelEncoder()
+df["CustomerId"]=le.fit_transform(df["CustomerId"])
+df["Surname"]=le.fit_transform(df["Surname"])
+df["CreditScore"]=le.fit_transform(df["CreditScore"])
+df["Geography"]=le.fit_transform(df["Geography"])
+df["Gender"]=le.fit_transform(df["Gender"])
+df["Balance"]=le.fit_transform(df["Balance"])
+df["EstimatedSalary"]=le.fit_transform(df["EstimatedSalary"])
+X=df.iloc[:,:-1].values
+print(X)
+Y=df.iloc[:,-1].values
+print(Y)
+print(df.isnull().sum())
+df.fillna(df.mean().round(1),inplace=True)
+print(df.isnull().sum())
+y=df.iloc[:,-1].values
+print(y)
+df.duplicated()
+print(df['Exited'].describe())
+scaler= MinMaxScaler()
+df1=pd.DataFrame(scaler.fit_transform(df))
+print(df1)
+x_train,x_test,y_train,x_test=train_test_split(X,Y,test_size=0.2)
+print(x_train)
+print(len(x_train))
+print(x_test)
+print(len(x_test))
+```
 
 ## OUTPUT:
-/ Show the result/
+### Printing first five rows of the dataset:
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/9ad3c2aa-82ce-42d0-8bca-91ae9231e201)
+### Separating x and y values:
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/202479aa-9aba-4276-9edf-de53e7fbf3d9)
+### Checking NULL value for the dataset:
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/bbcb41c5-0694-49d6-85e0-22d51a8f14bd)
+### Column y and its description:
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/38db1f81-9bcd-447e-8773-b6ac495a63cb)
+### Applying data preprocessing technique and printing the dataset
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/6c81854f-8ac8-4260-91f6-1eb2b5e1384a)
+### Training Set
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/f4696d14-9de9-4756-81b6-3f101cd1eb00)
+### Testing Set and its length
+![image](https://github.com/Anusha-Rajarajan/Ex.No.1---Data-Preprocessing/assets/93427472/cb37e036-2f79-4df5-8141-3931e4d68a5c)
+
 
 ## RESULT
-/Type your result here/
+Hence the data preprocessing is done using the above code and data has been splitted into trainning and testing data for getting a better model.
